@@ -1,5 +1,5 @@
 # tp-devops1
-Définir comment déployer, dans Kubernetes, une instance d’un projet à chaque fois qu’une pull-request 
+Définir comment déployer, dans Kubernetes, une instance d’un projet à chaque fois qu’un pull-request 
 est envoyée + mettre en place l’automatisation qui le fait.
 
 ## Pre-requis pour Centos 7

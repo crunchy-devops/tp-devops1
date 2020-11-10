@@ -27,7 +27,7 @@
 %	ASSIGNMENT INFORMATION
 %----------------------------------------------------------------------------------------
 
-\title{Plateforme de CI/CD} % Title of the assignment
+\title{Une plateforme de CI/CD } % Title of the assignment
 
 \author{Hervé Meftah\\ \texttt{hmeftah@system-dev.io}} % Author name and email address
 
@@ -52,7 +52,7 @@ Ce document répond à la spécification suivante:
 %\end{info}
 
 \begin{info}[Expression des besoins]
-	Définir comment déployer, dans Kubernetes, une instance d’un projet à chaque fois qu’une pull-request est envoyée et
+	Définir comment déployer dans Kubernetes, une instance d’un projet à chaque fois qu’un pull-request est envoyée et
 	mettre en place l’automatisation qui le fait.
 \end{info}
 
@@ -99,17 +99,17 @@ Le container SonarQube scanne le code source pour effectuer un controle qualité
 le code ``mort'', la couverture des tests unitaires.
 En sortie de SonarQube, une tache Jenkins effectue un \textit{docker build} pour injecter le code source dans une image
 docker. \\
-Le container Nexus, correspond a un Artifactory, archive les images, les sources intermediaires pour un usage ultérieur.
+Le container Nexus, correspond à un Artifactory, archive les images, les sources intermediaires pour un usage ultérieur.
 Jmeter et Selenium sont des outils pour respectivement tester les montees en charge et les tests fonctionnels a travers
 l'interface Web ou GUI de l'application. \\
 L'automatisation de cette chaine d'intégration, pilotée par Jenkins, inclus Ansible et la version open-source Tower: AWX.
-Le provisionning d'infrastructure est fait avec Ansible, et en fin de chaine, Ansible se connecte a la plateforme Kubernetes
-pour déployer les artifacts validés par les tests et stockés dans Nexus.
+Le provisionning d'infrastructure est fait avec Ansible, et en fin de chaine, Ansible se connecte à la plateforme Kubernetes
+pour déployer les artifacts validés par les tests et stockés dans une image Docker présent dans Nexus.
 
 %------------------------------------------------
 
 \section{Installation de la platforme}
-\subsection{Pre-requis}
+\subsection{Pré-requis}
 Quelques outils doivent etre installes en premier pour faciliter la gestion de la plateforme.
 \begin{commandline}
 	\begin{verbatim}
@@ -126,9 +126,25 @@ Quelques outils doivent etre installes en premier pour faciliter la gestion de l
 	\end{verbatim}
 \end{commandline}
 
-\subsection{Installation de Docker}
+\subsection{Docker}
+Docker permet la création d'applications virtualisées dans des containers, qui sont plus légers que des machines virtuelles
+Docker fait partie des concepts \textit{d'Infrastructure As Code (IaC)} ou votre environnement applicatif est ``codé''
+par des scripts exécutables, versionnables et donc tracable tout au long du cycle de développement.
 
-In malesuada ullamcorper urna, sed dapibus diam sollicitudin non. Donec elit odio, accumsan ac nisl a, tempor imperdiet eros. Donec porta tortor eu risus consequat, a pharetra tortor tristique. Morbi sit amet laoreet erat. Morbi et luctus diam, quis porta ipsum. Quisque libero dolor, suscipit id facilisis eget, sodales volutpat dolor. Nullam vulputate interdum aliquam. Mauris id convallis erat, ut vehicula neque. Sed auctor nibh et elit fringilla, nec ultricies dui sollicitudin. Vestibulum vestibulum luctus metus venenatis facilisis. Suspendisse iaculis augue at vehicula ornare. Sed vel eros ut velit fermentum porttitor sed sed massa. Fusce venenatis, metus a rutrum sagittis, enim ex maximus velit, id semper nisi velit eu purus.
+\subsubsection{Installation de Docker}
+Docker peut etre installé par des packages de l'OS, mais la maniere la plus rapide est d'utiliser Ansible.
+\begin{commandline}
+	\begin{verbatim}
+	sudo yum -y install python3
+	python3 -m venv venv  # install virtualenv module dans la directory venv
+  	source venv/bin/activate # activate the python virtualenv
+  	pip3 install wheel  # install pip package wheel for permission usage
+  	pip3 install ansible # install ansible
+  	ansible --version  # check
+	ansible-playbook -i inventory  playbook.yml
+	\end{verbatim}
+\end{commandline}
+
 
 %\begin{center}
 %	\begin{minipage}{0.5\linewidth} % Adjust the minipage width to accomodate for the length of algorithm lines

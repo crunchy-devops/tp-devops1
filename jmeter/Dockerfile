@@ -4,11 +4,11 @@ FROM alpine:3.11
 
 MAINTAINER modified by HMeftah <dockerlite@gmail.com> initialed by Just van den Broecke<just@justobjects.nl>
 
-ARG JMETER_VERSION="5.2.1"
+ARG JMETER_VERSION="5.3"
 ENV JMETER_HOME  /jmeter
 ENV	JMETER_BIN	/jmeter/bin
 ENV	JMETER_DOWNLOAD_URL  https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-${JMETER_VERSION}.tgz
-
+https://downloads.apache.org//jmeter/binaries/apache-jmeter-5.3.tgz
 # Install extra packages
 # See https://github.com/gliderlabs/docker-alpine/issues/136#issuecomment-272703023
 # Change TimeZone TODO: TZ still is not set!
